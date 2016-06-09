@@ -10,3 +10,6 @@ tree*
 
 # distribution version
 dist/
+
+# logs
+logs/*.log

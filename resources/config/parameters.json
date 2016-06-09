@@ -1,0 +1,10 @@
+{
+  "process": {
+    "name": "express-boilerplate",
+    "port": 3000
+  },
+  "logger": {
+    "directory": "./logs",
+    "dateFormat": "YYYY MMM D H:mm:ss"
+  }
+}
