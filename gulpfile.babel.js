@@ -3,7 +3,9 @@ import babel from 'gulp-babel'
 import sourcemaps from 'gulp-sourcemaps'
 
 gulp.task('dist', () => {
-  gulp.src(['./app.js', 'src/**/*.js'])
+  gulp.src(['./resources/**/*.json'])
+    .pipe(gulp.dest('dist/resources'))
+  gulp.src(['./main.js', './app.js'])
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015'],
@@ -12,4 +14,13 @@ gulp.task('dist', () => {
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('dist'))
+  gulp.src(['src/**/*.js'])
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['es2015'],
+      comments: false,
+      minified: true
+    }))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/src'))
 })

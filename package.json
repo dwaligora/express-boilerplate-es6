@@ -8,7 +8,9 @@
   "private": true,
   "scripts": {
     "test": "mocha --recursive --compilers js:babel-register",
-    "start": "nodemon -L app.js --exec babel-node"
+    "start": "nodemon -L app.js --exec babel-node",
+    "build": "gulp dist",
+    "serve": "node dist/app.js"
   },
   "dependencies": {
     "body-parser": "^1.15.1",
