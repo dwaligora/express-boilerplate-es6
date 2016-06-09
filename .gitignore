@@ -6,7 +6,8 @@
 
 # code
 node_modules/
-tree*
+npm-debug.log
+tree
 
 # distribution version
 dist/

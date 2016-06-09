@@ -18,38 +18,6 @@ const DIContainer = {}
 DIContainer.router = Router()
 
 /*
- * Add DB client to DI
- */
-import knex from 'knex'
-import DatabaseClient from './services/DatabaseClient'
-const databaseClient = new DatabaseClient(
-  knex, config.db.host, config.db.user, config.db.password, config.db.database
-)
-DIContainer.dbClient = databaseClient.connect()
-
-/*
- * Configure User Repository
- */
-import UserRepository from './repositories/UserRepository'
-const userRepository = new UserRepository(
-  DIContainer.dbClient
-)
-DIContainer.userRepository = userRepository
-
-/*
- * Configure User Controller
- */
-import UserController from './controllers/UserController'
-import userParamConverter from './middlewares/paramConverters/user'
-
-const userController = new UserController(
-  DIContainer.router,
-  DIContainer.userRepository,
-  userParamConverter
-)
-DIContainer.userController = userController
-
-/*
  * configure application logger service
  */
 import winston from 'winston'
@@ -77,8 +45,8 @@ if (process.env.NODE_ENV === 'production') {
   const commonConfig = {
     ...options,
     json: true,
-    maxsize: 5242880,
-    maxFiles: 5
+    maxsize: config.logger.maxFileSize,
+    maxFiles: config.logger.maxFiles
   }
 
   transports.push(
@@ -108,5 +76,42 @@ DIContainer.logger = new Logger(
     processName: config.process.name
   }
 )
+
+/*
+ * Add DB client to DI
+ */
+import knex from 'knex'
+import DatabaseClient from './services/DatabaseClient'
+const databaseClient = new DatabaseClient(
+  knex,
+  config.db.host,
+  config.db.user,
+  config.db.password,
+  config.db.database,
+  DIContainer.logger
+)
+DIContainer.dbClient = databaseClient.connect()
+
+/*
+ * Configure User Repository
+ */
+import UserRepository from './repositories/UserRepository'
+const userRepository = new UserRepository(
+  DIContainer.dbClient
+)
+DIContainer.userRepository = userRepository
+
+/*
+ * Configure User Controller
+ */
+import UserController from './controllers/UserController'
+import userParamConverter from './middlewares/paramConverters/user'
+
+const userController = new UserController(
+  DIContainer.router,
+  DIContainer.userRepository,
+  userParamConverter
+)
+DIContainer.userController = userController
 
 export default DIContainer

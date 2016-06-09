@@ -13,7 +13,22 @@ import AbstractRepository from './AbstractRepository'
  */
 class UserRepository extends AbstractRepository {
   constructor (dbClient) {
-    super(dbClient, 'users')
+    const dbTable = 'users'
+    super(dbClient, dbTable)
+
+    this.dbTable = dbTable
+  }
+
+  /**
+   * @inheritDoc
+   *
+   * @param {Object} user
+   */
+  save (user) {
+    user.updated_at = Date.now()
+    user.created_at = Date.now()
+
+    return super.save(user)
   }
 }
 

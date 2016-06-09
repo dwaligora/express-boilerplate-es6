@@ -6,6 +6,9 @@
  */
 import { HTTP_STATUS } from './../constants/http'
 
+/**
+ * @class UserController
+ */
 class UserController {
   /**
    * @constructor
@@ -18,12 +21,6 @@ class UserController {
     this.router = router
     this.userRepository = userRepository
     this.paramConverter = paramConverter
-
-    // set method context
-    this.configureRoutes.bind(this)
-    this.create.bind(this)
-    this.get.bind(this)
-    this.list.bind(this)
   }
 
   /**
@@ -34,14 +31,17 @@ class UserController {
    * @param {Function} next
    */
   create (req, res, next) {
-    console.log('this', this)
     this.userRepository.save({
       name: 'test',
-      email: 'test@email.com'
+      email: 'test@email2wwww.com'
     }).then((id) => {
       res
         .status(HTTP_STATUS.CREATED)
-        .send({message: `Creating user ${id}`})
+        .send({user: `Creating user ${id}`})
+    }, (err) => {
+      res
+        .status(HTTP_STATUS.SERVER_ERROR)
+        .send({msg: err.message})
     })
   }
 
@@ -64,7 +64,16 @@ class UserController {
    * @param {Function} next
    */
   list (req, res, next) {
-    res.send('List Users')
+    this.userRepository.find()
+      .then((userCollection) => {
+        res
+          .status(HTTP_STATUS.CREATED)
+          .send({users: userCollection})
+      }, (err) => {
+        res
+          .status(HTTP_STATUS.SERVER_ERROR)
+          .send({})
+      })
   }
 
   /**
@@ -73,15 +82,15 @@ class UserController {
    * @returns {Router}
    */
   configureRoutes () {
-    this.router.post('/', this.create)
+    this.router.post('/', this.create.bind(this))
 
     this.router.get(
       '/:id',
       this.paramConverter.findById(this.userRepository),
-      this.get
+      this.get.bind(this)
     )
 
-    this.router.get('/', this.list)
+    this.router.get('/', this.list.bind(this))
 
     return this.router
   }

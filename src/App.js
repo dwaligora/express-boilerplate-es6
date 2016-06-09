@@ -28,11 +28,11 @@ class App {
    * @returns {Promise}
    */
   startHttpServer () {
-    this.di.logger.info(
-      'Bootstrapping the http server with configuration:', this.config
-    )
-
     return new Promise((resolve, reject) => {
+      this.di.logger.info(
+        'Bootstrapping the http server with configuration:', this.config
+      )
+
       // before middlewares
       this.middlewareLoader.beforeRouting(this.httpServer, this.di)
 

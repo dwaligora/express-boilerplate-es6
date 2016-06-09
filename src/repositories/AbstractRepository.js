@@ -15,21 +15,40 @@ class AbstractRepository {
     this.dbTable = dbTable
   }
 
-  save (user) {
+  /**
+   * Finds data by given criteria
+   *
+   * @returns {Promise}
+   */
+  find (criteria = {}) {
+    let qb = this.dbClient
+      .select('*')
+      .from(this.dbTable)
+
+    if (criteria) {
+      qb.where(criteria)
+    }
+
+    return qb
+  }
+
+  /**
+   * Stores data in db
+   *
+   * @param data
+   * @returns {Promise}
+   */
+  save (data) {
     return new Promise((resolve, reject) => {
-      if (!_.isObject(user)) {
-        reject(
-          `Repository::save expect object as an argument. ${typeof user} given.`
+      if (!_.isObject(data)) {
+        return reject(
+          `Repository::save expect object as an argument. ${typeof data} given.`
         )
       }
 
-      this.dbClient(this.dbTable)
-        .insert(user)
-        .then((id) => {
-          return resolve(id)
-        }, (err) => {
-          return reject(err)
-        })
+      return this.dbClient(this.dbTable)
+        .insert(data)
+        .then(id => resolve(id))
     })
   }
 }

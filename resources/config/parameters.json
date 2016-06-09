@@ -5,7 +5,9 @@
   },
   "logger": {
     "directory": "./logs",
-    "dateFormat": "YYYY MMM D H:mm:ss"
+    "dateFormat": "YYYY MMM D H:mm:ss",
+    "maxFileSize": 5242880,
+    "maxFiles": 5
   },
   "db": {
     "host": "localhost",
