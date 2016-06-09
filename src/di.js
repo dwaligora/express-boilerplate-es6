@@ -6,10 +6,23 @@
  * Created at 09/06/16 00:20
  */
 import moment from 'moment'
+import { Router } from 'express'
 import configLoader from './configLoader'
 
 const config = configLoader()
 const DIContainer = {}
+
+/*
+ * Add router to DI
+ */
+DIContainer.router = Router()
+
+/*
+ * Configure User Controller
+ */
+import UserController from './controllers/UserController'
+const userController = new UserController(DIContainer.router)
+DIContainer.userController = userController
 
 /*
  * configure application logger service
