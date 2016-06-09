@@ -1,0 +1,11 @@
+source 'https://api.berkshelf.com'
+
+cookbook 'build-essential', '~> 2.3.0'
+cookbook 'apt', '~> 2.9.2'
+cookbook 'git', '~> 4.3.7'
+cookbook 'nodejs', '~> 2.4.4'
+cookbook 'nginx', '~> 2.7.6'
+cookbook 'redisio', '~> 2.3.0'
+cookbook 'mysql', '~> 6.1.2'
+
+cookbook 'application', path: './application'

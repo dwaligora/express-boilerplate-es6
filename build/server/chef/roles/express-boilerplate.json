@@ -1,0 +1,24 @@
+{
+    "name": "express-boilerplate",
+    "description": "Node Express.js boilerplate VM setup",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+    },
+    "override_attributes": {
+    },
+    "chef_type": "role",
+    "run_list": [
+        "recipe[apt]",
+        "recipe[build-essential]",
+        "recipe[git]",
+        "recipe[redisio]",
+        "recipe[redisio::enable]",
+        "recipe[nodejs]",
+        "recipe[nodejs::npm]",
+        "recipe[nginx]",
+        "recipe[application]",
+        "recipe[application::node]"
+    ],
+    "env_run_lists": {
+    }
+}

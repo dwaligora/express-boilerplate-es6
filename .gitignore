@@ -1,0 +1,9 @@
+# code editors
+.idea
+
+# build
+.vagrant
+
+# code
+node_modules/
+tree*
