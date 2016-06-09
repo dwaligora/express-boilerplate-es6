@@ -28,9 +28,9 @@ class Logger {
     const lastArgument = args[args.length - 1]
 
     if (_.isObject(lastArgument)) {
-      args[args.length - 1] = { ...extendData, ...lastArgument }
+      args[args.length - 1] = { ...lastArgument, ...extendData }
     } else {
-      args[args.length - 1] = { ...extendData, message: lastArgument }
+      args[args.length - 1] = { message: lastArgument, ...extendData }
     }
 
     return args

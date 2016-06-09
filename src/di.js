@@ -6,7 +6,10 @@
  * Created at 09/06/16 00:20
  */
 import moment from 'moment'
-import Config from './../resources/config/parameters'
+import configLoader from './configLoader'
+
+const config = configLoader()
+const DIContainer = {}
 
 /*
  * configure application logger service
@@ -16,7 +19,7 @@ import Logger from './services/Logger'
 
 const options = {
   timestamp: () => {
-    return moment().format(Config.logger.dateFormat)
+    return moment().format(config.logger.dateFormat)
   }
 }
 
@@ -43,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
   transports.push(
     new (winston.transports.File)({
       name: 'info',
-      filename: Config.logger.directory + '/info.log',
+      filename: config.logger.directory + '/info.log',
       level: 'info',
       ...commonConfig
     })
@@ -51,19 +54,21 @@ if (process.env.NODE_ENV === 'production') {
   transports.push(
     new (winston.transports.File)({
       name: 'error',
-      filename: Config.logger.directory + '/error.log',
+      filename: config.logger.directory + '/error.log',
       level: 'error',
       ...commonConfig
     })
   )
 }
 
-export const logger = new Logger(
+DIContainer.logger = new Logger(
   new (winston.Logger)({
     transports: transports
   }),
   {
-    dateFormat: Config.logger.dateFormat,
-    processName: Config.process.name
+    dateFormat: config.logger.dateFormat,
+    processName: config.process.name
   }
 )
+
+export default DIContainer
