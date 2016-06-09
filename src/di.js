@@ -18,10 +18,35 @@ const DIContainer = {}
 DIContainer.router = Router()
 
 /*
+ * Add DB client to DI
+ */
+import knex from 'knex'
+import DatabaseClient from './services/DatabaseClient'
+const databaseClient = new DatabaseClient(
+  knex, config.db.host, config.db.user, config.db.password, config.db.database
+)
+DIContainer.dbClient = databaseClient.connect()
+
+/*
+ * Configure User Repository
+ */
+import UserRepository from './repositories/UserRepository'
+const userRepository = new UserRepository(
+  DIContainer.dbClient
+)
+DIContainer.userRepository = userRepository
+
+/*
  * Configure User Controller
  */
 import UserController from './controllers/UserController'
-const userController = new UserController(DIContainer.router)
+import userParamConverter from './middlewares/paramConverters/user'
+
+const userController = new UserController(
+  DIContainer.router,
+  DIContainer.userRepository,
+  userParamConverter
+)
 DIContainer.userController = userController
 
 /*

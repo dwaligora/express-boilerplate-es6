@@ -6,5 +6,11 @@
   "logger": {
     "directory": "./logs",
     "dateFormat": "YYYY MMM D H:mm:ss"
+  },
+  "db": {
+    "host": "localhost",
+    "user": "root",
+    "password": "boilerplate",
+    "database": "boilerplate"
   }
 }

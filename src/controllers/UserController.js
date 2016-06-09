@@ -4,15 +4,45 @@
  * @package express-boilerplate
  * @author Daniel Waligora <danielwaligora@gmail.com>
  */
+import { HTTP_STATUS } from './../constants/http'
+
 class UserController {
   /**
+   * @constructor
    *
    * @param {Router} router
-   * @param {userRepository
+   * @param {UserRepository} userRepository
+   * @param {Object} paramConverter
    */
-  constructor (router, userRepository) {
+  constructor (router, userRepository, paramConverter) {
     this.router = router
     this.userRepository = userRepository
+    this.paramConverter = paramConverter
+
+    // set method context
+    this.configureRoutes.bind(this)
+    this.create.bind(this)
+    this.get.bind(this)
+    this.list.bind(this)
+  }
+
+  /**
+   * Created User
+   *
+   * @param {Request} req
+   * @param {Response} res
+   * @param {Function} next
+   */
+  create (req, res, next) {
+    console.log('this', this)
+    this.userRepository.save({
+      name: 'test',
+      email: 'test@email.com'
+    }).then((id) => {
+      res
+        .status(HTTP_STATUS.CREATED)
+        .send({message: `Creating user ${id}`})
+    })
   }
 
   /**
@@ -43,7 +73,14 @@ class UserController {
    * @returns {Router}
    */
   configureRoutes () {
-    this.router.get('/:id', this.get)
+    this.router.post('/', this.create)
+
+    this.router.get(
+      '/:id',
+      this.paramConverter.findById(this.userRepository),
+      this.get
+    )
+
     this.router.get('/', this.list)
 
     return this.router

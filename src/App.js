@@ -12,12 +12,14 @@ class App {
    * @param {Object} di
    * @param {Object} httpServer
    * @param {Object} routingLoader
+   * @param {Object} middlewareLoader
    */
-  constructor (config, di, httpServer, routingLoader) {
+  constructor (config, di, httpServer, routingLoader, middlewareLoader) {
     this.config = config
     this.di = di
     this.httpServer = httpServer
     this.routingLoader = routingLoader
+    this.middlewareLoader = middlewareLoader
   }
 
   /**
@@ -31,8 +33,8 @@ class App {
     )
 
     return new Promise((resolve, reject) => {
-      // internal middleware
-      // this.httpServer.use(middleware());
+      // before middlewares
+      this.middlewareLoader.beforeRouting(this.httpServer, this.di)
 
       // api router
       this.routingLoader(this.httpServer, this.di)

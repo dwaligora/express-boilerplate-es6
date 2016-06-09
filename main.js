@@ -10,12 +10,13 @@ import express from 'express'
 import di from './src/di'
 import configLoader from './src/configLoader'
 import routingLoader from './src/controllers/routingLoader'
+import middlewareLoader from './src/middlewares/middlewareLoader'
 import App from './src/App'
 
 const config = configLoader()
 
 export const startHttpServer = () => {
-  const app = new App(config, di, express(), routingLoader)
+  const app = new App(config, di, express(), routingLoader, middlewareLoader)
   app.startHttpServer()
     .then(null, (err) => {
       di.logger.error(err)
