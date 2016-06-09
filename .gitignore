@@ -7,3 +7,6 @@
 # code
 node_modules/
 tree*
+
+# distribution version
+dist/

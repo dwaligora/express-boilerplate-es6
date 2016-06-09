@@ -12,7 +12,7 @@ const app = express()
 
 // sasa
 app.get('/', (req, res) => {
-  res.send('Hello!')
+  res.send('Hello World!')
 })
 
 app.listen(3000, () => {

@@ -6,7 +6,6 @@
  *
  * Created at 09/06/16 00:28
  */
-/* eslint-env mocha */
 import standard from 'mocha-standard'
 
 describe('coding style', () => {
