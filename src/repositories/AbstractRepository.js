@@ -48,7 +48,10 @@ class AbstractRepository {
 
       return this.dbClient(this.dbTable)
         .insert(data)
-        .then(id => resolve(id))
+        .then(
+          id => resolve(id),
+          err => reject(err)
+        )
     })
   }
 }
