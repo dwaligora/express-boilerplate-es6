@@ -28,17 +28,16 @@ class UserController {
    *
    * @param {Request} req
    * @param {Response} res
-   * @param {Function} next
    */
-  create (req, res, next) {
+  create (req, res) {
     this.userRepository.save({
       name: 'test',
       email: 'test@email2wwww.com'
-    }).then((id) => {
+    }).then(id => {
       res
         .status(HTTP_STATUS.CREATED)
         .send({user: `Creating user ${id}`})
-    }, (err) => {
+    }, err => {
       res
         .status(HTTP_STATUS.SERVER_ERROR)
         .send({msg: err.message})
@@ -50,10 +49,24 @@ class UserController {
    *
    * @param {Request} req
    * @param {Response} res
-   * @param {Function} next
    */
-  get (req, res, next) {
-    res.send(`Get User with id ${req.params.id}`)
+  get (req, res) {
+    this.userRepository.findOneBy({id: req.params.id})
+      .then(user => {
+        if (user) {
+          return res
+            .status(HTTP_STATUS.OK)
+            .send(user)
+        }
+
+        return res
+          .status(HTTP_STATUS.NOT_FOUND)
+          .send({msg: `User with id ${req.params.id} not found.`})
+      }, err => {
+        res
+          .status(HTTP_STATUS.SERVER_ERROR)
+          .send({msg: err.message})
+      })
   }
 
   /**
@@ -61,18 +74,17 @@ class UserController {
    *
    * @param {Request} req
    * @param {Response} res
-   * @param {Function} next
    */
-  list (req, res, next) {
+  list (req, res) {
     this.userRepository.find()
-      .then((userCollection) => {
+      .then(userCollection => {
         res
-          .status(HTTP_STATUS.CREATED)
+          .status(HTTP_STATUS.OK)
           .send({users: userCollection})
-      }, (err) => {
+      }, err => {
         res
           .status(HTTP_STATUS.SERVER_ERROR)
-          .send({})
+          .send({msg: err.message})
       })
   }
 
@@ -86,7 +98,6 @@ class UserController {
 
     this.router.get(
       '/:id',
-      this.paramConverter.findById(this.userRepository),
       this.get.bind(this)
     )
 

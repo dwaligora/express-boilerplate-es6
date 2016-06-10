@@ -20,9 +20,26 @@ class UserRepository extends AbstractRepository {
   }
 
   /**
+   * Finds single user by given criteria
+   *
+   * @param {object} criteria
+   * @returns {Promise}
+   */
+  findOneBy (criteria) {
+    return super.find(criteria).then(users => {
+      if (users.length) {
+        return users[0]
+      }
+
+      return null
+    })
+  }
+
+  /**
    * @inheritDoc
    *
    * @param {Object} user
+   * @returns {Promise}
    */
   save (user) {
     user.updated_at = Date.now()

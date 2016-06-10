@@ -17,7 +17,6 @@ const findById = (userRepository) => {
       return res.status(HTTP_STATUS.BAD_REQUEST).send()
     }
 
-    res.locals.user = req.
     next()
   }
 }
