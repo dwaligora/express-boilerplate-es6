@@ -80,17 +80,18 @@ DIContainer.logger = new Logger(
 /*
  * Add DB client to DI
  */
-import knex from 'knex'
-import DatabaseClient from './services/DatabaseClient'
-const databaseClient = new DatabaseClient(
-  knex,
-  config.db.host,
-  config.db.user,
-  config.db.password,
-  config.db.database,
-  DIContainer.logger
-)
-DIContainer.dbClient = databaseClient.connect()
+// import knex from 'knex'
+// import DatabaseClient from './services/DatabaseClient'
+// const databaseClient = new DatabaseClient(
+//   knex,
+//   config.db.host,
+//   config.db.user,
+//   config.db.password,
+//   config.db.database,
+//   DIContainer.logger
+// )
+// DIContainer.dbClient = databaseClient.connect()
+DIContainer.dbClient = {}
 
 /*
  * Configure User Repository

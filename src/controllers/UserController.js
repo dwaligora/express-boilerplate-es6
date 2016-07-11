@@ -76,16 +76,19 @@ class UserController {
    * @param {Response} res
    */
   list (req, res) {
-    this.userRepository.find()
-      .then(userCollection => {
-        res
-          .status(HTTP_STATUS.OK)
-          .send({users: userCollection})
-      }, err => {
-        res
-          .status(HTTP_STATUS.SERVER_ERROR)
-          .send({msg: err.message})
-      })
+    res
+        .status(HTTP_STATUS.OK)
+        .send({msg: 'All good.'})
+    // this.userRepository.find()
+    //   .then(userCollection => {
+    //     res
+    //       .status(HTTP_STATUS.OK)
+    //       .send({users: userCollection})
+    //   }, err => {
+    //     res
+    //       .status(HTTP_STATUS.SERVER_ERROR)
+    //       .send({msg: err.message})
+    //   })
   }
 
   /**
