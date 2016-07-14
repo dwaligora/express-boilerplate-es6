@@ -1,7 +1,11 @@
 /**
  * main
  *
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * Application entry point for different connection interfaces like:
+ * - web server
+ * - command line application
+ *
+ * @author Daniel Waligora <daniel@playabl.com>
  *
  * Created at 09/06/16 00:43
  */

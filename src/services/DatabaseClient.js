@@ -1,8 +1,8 @@
 /**
  * DatabaseClient
  *
- * @package express-boilerplate
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * @package predictabl-uranus
+ * @author Daniel Waligora <daniel@playabl.com>
  */
 class DatabaseClient {
   constructor (dbConnection, host, user, password, database, logger) {

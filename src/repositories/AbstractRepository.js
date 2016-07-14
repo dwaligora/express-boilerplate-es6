@@ -1,8 +1,8 @@
 /**
  * AbstractRepository
  *
- * @package express-boilerplate
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * @package predictabl-uranus
+ * @author Daniel Waligora <daniel@playabl.com>
  */
 import _ from 'lodash'
 

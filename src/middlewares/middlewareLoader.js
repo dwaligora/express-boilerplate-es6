@@ -1,8 +1,8 @@
 /**
  * middlewareLoader
  *
- * @package express-boilerplate
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * @package predictabl-uranus
+ * @author Daniel Waligora <daniel@playabl.com>
  */
 import bodyParser from 'body-parser'
 import requestLogger from './requestLogger'

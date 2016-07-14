@@ -1,8 +1,8 @@
 /**
  * http related constants
  *
- * @package express-boilerplate
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * @package predictabl-uranus
+ * @author Daniel Waligora <daniel@playabl.com>
  */
 export const HTTP_STATUS = {
   CREATED: 201,

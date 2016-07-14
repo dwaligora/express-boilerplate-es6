@@ -1,5 +1,5 @@
 {
-  "name": "express-boilerplate",
+  "name": "predictabl-uranus",
   "version": "0.0.1",
   "engines": {
     "node": "6.2.1"
@@ -36,7 +36,7 @@
   },
   "author": {
     "name": "Daniel Waligóra",
-    "email": "danielwaligora@gmail.com"
+    "email": "daniel@playabl.com"
   },
   "license": "ISC"
 }

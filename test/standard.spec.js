@@ -2,7 +2,7 @@
  * standard.spec.js
  *
  * @package api
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * @author Daniel Waligora <daniel@playabl.com>
  *
  * Created at 09/06/16 00:28
  */

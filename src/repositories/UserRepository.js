@@ -1,8 +1,8 @@
 /**
  * UserRepository
  *
- * @package express-boilerplate
- * @author Daniel Waligora <danielwaligora@gmail.com>
+ * @package predictabl-uranus
+ * @author Daniel Waligora <daniel@playabl.com>
  *
  * Created at 09/06/16 20:54
  */
